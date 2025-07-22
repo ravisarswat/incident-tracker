@@ -102,10 +102,8 @@ def view():
         OR follow_up LIKE ?
         OR code_review LIKE ?
         OR product LIKE ?
-        OR reviewed LIKE ?
-        OR reviewed_date LIKE ?
         '''
-        count_params = [f"%{keyword}%"] * 9
+        count_params = [f"%{keyword}%"] * 7
         c.execute(count_query, count_params)
         total_rows = c.fetchone()[0]
 
@@ -118,12 +116,10 @@ def view():
         OR follow_up LIKE ?
         OR code_review LIKE ?
         OR product LIKE ?
-        OR reviewed LIKE ?
-        OR reviewed_date LIKE ?
         ORDER BY id DESC
         LIMIT ? OFFSET ?
         '''
-        params = [f"%{keyword}%"] * 9 + [limit, offset]
+        params = [f"%{keyword}%"] * 7 + [limit, offset]
         c.execute(query, params)
     else:
         c.execute('SELECT COUNT(*) FROM incidents')
