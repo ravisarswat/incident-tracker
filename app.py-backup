@@ -32,9 +32,7 @@ def init_db():
             root_cause TEXT,
             code_review TEXT,
             testing TEXT,
-            follow_up TEXT,
-            reviewed TEXT,
-            reviewed_date TEXT
+            follow_up TEXT
         )
     ''')
     conn.commit()
@@ -62,9 +60,7 @@ def submit():
         request.form.get('root_cause'),
         request.form.get('code_review'),
         request.form.get('testing'),
-        request.form.get('follow_up'),
-        request.form.get('reviewed'),
-        request.form.get('reviewed_date')
+        request.form.get('follow_up')
     ]
 
     conn = sqlite3.connect(DB_PATH)
@@ -74,8 +70,8 @@ def submit():
             incident_number, month, opened_date, initial_severity,
             final_impact_classification, accountability, product_line,
             product, seal_id, issue_description, impact, timeline_summary,
-            root_cause, code_review, testing, follow_up, reviewed, reviewed_date
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            root_cause, code_review, testing, follow_up
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ''', data)
     conn.commit()
     conn.close()
@@ -93,37 +89,18 @@ def view():
     c = conn.cursor()
 
     if keyword:
-        count_query = '''
-        SELECT COUNT(*) FROM incidents
-        WHERE incident_number LIKE ?
-        OR issue_description LIKE ?
-        OR impact LIKE ?
-        OR root_cause LIKE ?
-        OR follow_up LIKE ?
-        OR code_review LIKE ?
-        OR product LIKE ?
-        '''
-        count_params = [f"%{keyword}%"] * 7
+        count_query = '''SELECT COUNT(*) FROM incidents WHERE incident_number LIKE ? OR issue_description LIKE ? OR impact LIKE ? OR root_cause LIKE ?'''
+        count_params = [f"%{keyword}%"] * 4
         c.execute(count_query, count_params)
         total_rows = c.fetchone()[0]
 
-        query = '''
-        SELECT * FROM incidents
-        WHERE incident_number LIKE ?
-        OR issue_description LIKE ?
-        OR impact LIKE ?
-        OR root_cause LIKE ?
-        OR follow_up LIKE ?
-        OR code_review LIKE ?
-        OR product LIKE ?
-        ORDER BY id DESC
-        LIMIT ? OFFSET ?
-        '''
-        params = [f"%{keyword}%"] * 7 + [limit, offset]
+        query = '''SELECT * FROM incidents WHERE incident_number LIKE ? OR issue_description LIKE ? OR impact LIKE ? OR root_cause LIKE ? ORDER BY id DESC LIMIT ? OFFSET ?'''
+        params = [f"%{keyword}%"] * 4 + [limit, offset]
         c.execute(query, params)
     else:
         c.execute('SELECT COUNT(*) FROM incidents')
         total_rows = c.fetchone()[0]
+
         c.execute('SELECT * FROM incidents ORDER BY id DESC LIMIT ? OFFSET ?', (limit, offset))
 
     records = c.fetchall()
@@ -155,8 +132,6 @@ def edit(id):
             request.form.get('code_review'),
             request.form.get('testing'),
             request.form.get('follow_up'),
-            request.form.get('reviewed'),
-            request.form.get('reviewed_date'),
             id
         ]
         c.execute('''
@@ -164,7 +139,7 @@ def edit(id):
                 incident_number=?, month=?, opened_date=?, initial_severity=?,
                 final_impact_classification=?, accountability=?, product_line=?,
                 product=?, seal_id=?, issue_description=?, impact=?, timeline_summary=?,
-                root_cause=?, code_review=?, testing=?, follow_up=?, reviewed=?, reviewed_date=?
+                root_cause=?, code_review=?, testing=?, follow_up=?
             WHERE id=?
         ''', data)
         conn.commit()
@@ -201,5 +176,6 @@ def export_excel():
 if __name__ == '__main__':
     init_db()
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host="0.0.0.0", port=port)
+
 

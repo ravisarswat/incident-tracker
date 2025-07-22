@@ -108,20 +108,6 @@
           <textarea name="follow_up" class="form-control"></textarea>
         </div>
 
-        <div class="col-md-6">
-          <label class="form-label">Reviewed</label>
-          <select name="reviewed" class="form-select">
-            <option value="">Select</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-        </div>
-
-        <div class="col-md-6">
-          <label class="form-label">Reviewed Date</label>
-          <input type="date" name="reviewed_date" class="form-control">
-        </div>
-
         <div class="col-12 text-end">
           <button type="submit" class="btn btn-primary">Submit Incident</button>
         </div>

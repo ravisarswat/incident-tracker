@@ -89,20 +89,6 @@
         <textarea name="follow_up" class="form-control">{{ record[16] }}</textarea>
       </div>
 
-      <div class="col-md-6">
-        <label class="form-label">Reviewed</label>
-        <select name="reviewed" class="form-select">
-          <option value="">Select</option>
-          <option value="Yes" {% if record[17] == 'Yes' %}selected{% endif %}>Yes</option>
-          <option value="No" {% if record[17] == 'No' %}selected{% endif %}>No</option>
-        </select>
-      </div>
-
-      <div class="col-md-6">
-        <label class="form-label">Reviewed Date</label>
-        <input type="date" name="reviewed_date" class="form-control" value="{{ record[18] }}">
-      </div>
-
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Update Incident</button>
         <a href="/view" class="btn btn-secondary ms-2">Cancel</a>
