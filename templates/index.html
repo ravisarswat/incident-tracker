@@ -6,23 +6,32 @@
 </head>
 <body class="bg-light">
   <div class="container mt-5">
+
+    <!-- Header and View Link -->
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="text-primary">Incident Submission Form</h2>
       <a href="/view" class="btn btn-outline-primary">View All Incidents</a>
     </div>
+
+    <!-- Incident Form Starts -->
     <form method="post" action="/submit" class="row g-3">
+
+      <!-- Basic Incident Details -->
       <div class="col-md-6">
         <label class="form-label">Incident Number</label>
         <input type="text" name="incident_number" class="form-control" required>
       </div>
+
       <div class="col-md-6">
         <label class="form-label">Month</label>
         <input type="text" name="month" class="form-control">
       </div>
+
       <div class="col-md-6">
         <label class="form-label">Opened Date</label>
         <input type="date" name="opened_date" class="form-control">
       </div>
+
       <div class="col-md-6">
         <label class="form-label">Initial Severity</label>
         <select name="initial_severity" class="form-select">
@@ -31,10 +40,12 @@
           <option>High</option>
         </select>
       </div>
+
       <div class="col-md-6">
         <label class="form-label">Final Impact Classification</label>
         <input type="text" name="final_impact_classification" class="form-control">
       </div>
+
       <div class="col-md-6">
         <label class="form-label">Accountability</label>
         <select name="accountability" class="form-select">
@@ -42,46 +53,61 @@
           <option>Impacted</option>
         </select>
       </div>
+
+      <!-- Product Info -->
       <div class="col-md-6">
         <label class="form-label">Product Line</label>
         <input type="text" name="product_line" class="form-control">
       </div>
+
       <div class="col-md-6">
         <label class="form-label">Product</label>
         <input type="text" name="product" class="form-control">
       </div>
+
       <div class="col-md-6">
         <label class="form-label">Seal ID</label>
         <input type="text" name="seal_id" class="form-control">
       </div>
+
+      <!-- Incident Content -->
       <div class="col-12">
         <label class="form-label">What Happened</label>
         <textarea name="issue_description" class="form-control"></textarea>
       </div>
+
       <div class="col-12">
         <label class="form-label">Impact</label>
         <textarea name="impact" class="form-control"></textarea>
       </div>
+
       <div class="col-12">
         <label class="form-label">Timeline Summary</label>
         <textarea name="timeline_summary" class="form-control"></textarea>
       </div>
+
       <div class="col-12">
         <label class="form-label">Root Cause</label>
         <textarea name="root_cause" class="form-control"></textarea>
       </div>
+
+      <!-- Internal Checks -->
       <div class="col-12">
         <label class="form-label">Code Review</label>
         <input type="text" name="code_review" class="form-control">
       </div>
+
       <div class="col-12">
         <label class="form-label">Testing (UAT)</label>
         <textarea name="testing" class="form-control"></textarea>
       </div>
+
       <div class="col-12">
         <label class="form-label">Follow-up</label>
         <textarea name="follow_up" class="form-control"></textarea>
       </div>
+
+      <!-- Final Review -->
       <div class="col-md-6">
         <label class="form-label">Reviewed</label>
         <select name="reviewed" class="form-select">
@@ -90,14 +116,20 @@
           <option value="No">No</option>
         </select>
       </div>
+
       <div class="col-md-6">
         <label class="form-label">Reviewed Date</label>
         <input type="date" name="reviewed_date" class="form-control">
       </div>
+
+      <!-- Submit Button -->
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Submit Incident</button>
       </div>
+
     </form>
+    <!-- Form Ends -->
+
   </div>
 </body>
 </html>

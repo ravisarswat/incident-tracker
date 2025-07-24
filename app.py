@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 DB_PATH = 'database/incidents.db'
 
-# Ensure DB exists with correct schema
+# Ensure the database directory and schema are set up
 def init_db():
     os.makedirs('database', exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
@@ -44,6 +44,7 @@ def init_db():
 def index():
     return render_template('index.html')
 
+# Handle form submission and store new incident entry
 @app.route('/submit', methods=['POST'])
 def submit():
     data = [
@@ -82,6 +83,7 @@ def submit():
 
     return redirect('/view')
 
+# Display incident list with optional search and pagination
 @app.route('/view')
 def view():
     keyword = request.args.get('search', '').strip()
@@ -137,6 +139,7 @@ def view():
 
     return render_template('view.html', incidents=records, search=keyword, page=page, total_pages=total_pages)
 
+# Edit an existing incident by ID
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
     conn = sqlite3.connect(DB_PATH)
@@ -180,6 +183,7 @@ def edit(id):
         conn.close()
         return render_template('edit.html', record=record)
 
+# Delete an incident entry
 @app.route('/delete/<int:id>')
 def delete(id):
     conn = sqlite3.connect(DB_PATH)
@@ -189,6 +193,7 @@ def delete(id):
     conn.close()
     return redirect('/view')
 
+# Export all incidents to an Excel file
 @app.route('/export')
 def export_excel():
     conn = sqlite3.connect(DB_PATH)

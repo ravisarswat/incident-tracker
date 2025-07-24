@@ -7,8 +7,11 @@
 <body class="bg-light">
   <div class="container mt-5">
     <h2 class="mb-4">Edit Incident #{{ record[0] }}</h2>
+
+    <!-- Incident Edit Form -->
     <form method="post" class="row g-3">
 
+      <!-- Basic Info -->
       <div class="col-md-6">
         <label class="form-label">Incident Number</label>
         <input type="text" name="incident_number" class="form-control" value="{{ record[1] }}">
@@ -39,6 +42,7 @@
         <input type="text" name="accountability" class="form-control" value="{{ record[6] }}">
       </div>
 
+      <!-- Product Details -->
       <div class="col-md-6">
         <label class="form-label">Product Line</label>
         <input type="text" name="product_line" class="form-control" value="{{ record[7] }}">
@@ -54,6 +58,7 @@
         <input type="text" name="seal_id" class="form-control" value="{{ record[9] }}">
       </div>
 
+      <!-- Incident Details -->
       <div class="col-12">
         <label class="form-label">What Happened</label>
         <textarea name="issue_description" class="form-control">{{ record[10] }}</textarea>
@@ -74,6 +79,7 @@
         <textarea name="root_cause" class="form-control">{{ record[13] }}</textarea>
       </div>
 
+      <!-- Review Process -->
       <div class="col-12">
         <label class="form-label">Code Review</label>
         <input type="text" name="code_review" class="form-control" value="{{ record[14] }}">
@@ -89,6 +95,7 @@
         <textarea name="follow_up" class="form-control">{{ record[16] }}</textarea>
       </div>
 
+      <!-- Review Status -->
       <div class="col-md-6">
         <label class="form-label">Reviewed</label>
         <select name="reviewed" class="form-select">
@@ -103,6 +110,7 @@
         <input type="date" name="reviewed_date" class="form-control" value="{{ record[18] }}">
       </div>
 
+      <!-- Actions -->
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Update Incident</button>
         <a href="/view" class="btn btn-secondary ms-2">Cancel</a>
