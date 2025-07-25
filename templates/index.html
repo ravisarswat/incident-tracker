@@ -16,7 +16,6 @@
     <!-- Incident Form Starts -->
     <form method="post" action="/submit" class="row g-3">
 
-      <!-- Basic Incident Details -->
       <div class="col-md-6">
         <label class="form-label">Incident Number</label>
         <input type="text" name="incident_number" class="form-control" required>
@@ -24,21 +23,26 @@
 
       <div class="col-md-6">
         <label class="form-label">Month</label>
-        <input type="text" name="month" class="form-control">
+        <select name="month" class="form-select">
+          <option value="">Select Month</option>
+          <option>January</option>
+          <option>February</option>
+          <option>March</option>
+          <option>April</option>
+          <option>May</option>
+          <option>June</option>
+          <option>July</option>
+          <option>August</option>
+          <option>September</option>
+          <option>October</option>
+          <option>November</option>
+          <option>December</option>
+        </select>
       </div>
 
       <div class="col-md-6">
         <label class="form-label">Opened Date</label>
         <input type="date" name="opened_date" class="form-control">
-      </div>
-
-      <div class="col-md-6">
-        <label class="form-label">Initial Severity</label>
-        <select name="initial_severity" class="form-select">
-          <option>Low</option>
-          <option>Medium</option>
-          <option>High</option>
-        </select>
       </div>
 
       <div class="col-md-6">
@@ -54,7 +58,6 @@
         </select>
       </div>
 
-      <!-- Product Info -->
       <div class="col-md-6">
         <label class="form-label">Product Line</label>
         <input type="text" name="product_line" class="form-control">
@@ -62,7 +65,17 @@
 
       <div class="col-md-6">
         <label class="form-label">Product</label>
-        <input type="text" name="product" class="form-control">
+        <select name="product" class="form-select">
+          <option value="">Select Product</option>
+          <option>CACM</option>
+          <option>CDFO</option>
+          <option>Collection</option>
+          <option>FAS</option>
+          <option>LRCO</option>
+          <option>RPA</option>
+          <option>Service</option>
+          <option>Voice</option>
+        </select>
       </div>
 
       <div class="col-md-6">
@@ -70,7 +83,11 @@
         <input type="text" name="seal_id" class="form-control">
       </div>
 
-      <!-- Incident Content -->
+      <div class="col-md-6">
+        <label class="form-label">Seal Name</label>
+        <input type="text" name="seal_name" class="form-control">
+      </div>
+
       <div class="col-12">
         <label class="form-label">What Happened</label>
         <textarea name="issue_description" class="form-control"></textarea>
@@ -91,7 +108,6 @@
         <textarea name="root_cause" class="form-control"></textarea>
       </div>
 
-      <!-- Internal Checks -->
       <div class="col-12">
         <label class="form-label">Code Review</label>
         <input type="text" name="code_review" class="form-control">
@@ -107,7 +123,6 @@
         <textarea name="follow_up" class="form-control"></textarea>
       </div>
 
-      <!-- Final Review -->
       <div class="col-md-6">
         <label class="form-label">Reviewed</label>
         <select name="reviewed" class="form-select">
@@ -122,14 +137,11 @@
         <input type="date" name="reviewed_date" class="form-control">
       </div>
 
-      <!-- Submit Button -->
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Submit Incident</button>
       </div>
 
     </form>
-    <!-- Form Ends -->
-
   </div>
 </body>
 </html>
