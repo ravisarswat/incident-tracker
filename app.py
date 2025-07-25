@@ -1,9 +1,9 @@
-
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 import os
 
 app = Flask(__name__)
+os.makedirs('database', exist_ok=True)
 
 DB_FILE = 'database/incidents.db'
 
@@ -35,6 +35,9 @@ def init_db():
     ''')
     conn.commit()
     conn.close()
+
+# Initialize DB once at app startup
+init_db()
 
 @app.route('/')
 def index():
@@ -166,7 +169,3 @@ def export():
     df.to_excel(filepath, index=False)
     return f'Data exported to {filepath}'
 
-if __name__ == '__main__':
-    os.makedirs('database', exist_ok=True)
-    init_db()
-    app.run(debug=True)
