@@ -6,14 +6,11 @@
 </head>
 <body class="bg-light">
   <div class="container mt-5">
-
-    <!-- Header and View Link -->
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="text-primary">Incident Submission Form</h2>
       <a href="/view" class="btn btn-outline-primary">View All Incidents</a>
     </div>
 
-    <!-- Incident Form Starts -->
     <form method="post" action="/submit" class="row g-3">
 
       <div class="col-md-6">
@@ -25,18 +22,9 @@
         <label class="form-label">Month</label>
         <select name="month" class="form-select">
           <option value="">Select Month</option>
-          <option>January</option>
-          <option>February</option>
-          <option>March</option>
-          <option>April</option>
-          <option>May</option>
-          <option>June</option>
-          <option>July</option>
-          <option>August</option>
-          <option>September</option>
-          <option>October</option>
-          <option>November</option>
-          <option>December</option>
+          {% for m in ['January','February','March','April','May','June','July','August','September','October','November','December'] %}
+          <option value="{{ m }}">{{ m }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -67,14 +55,9 @@
         <label class="form-label">Product</label>
         <select name="product" class="form-select">
           <option value="">Select Product</option>
-          <option>CACM</option>
-          <option>CDFO</option>
-          <option>Collection</option>
-          <option>FAS</option>
-          <option>LRCO</option>
-          <option>RPA</option>
-          <option>Service</option>
-          <option>Voice</option>
+          {% for p in ['CACM', 'CDFO', 'Collection', 'FAS', 'LRCO', 'RPA', 'Service', 'Voice'] %}
+          <option value="{{ p }}">{{ p }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -140,7 +123,6 @@
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Submit Incident</button>
       </div>
-
     </form>
   </div>
 </body>

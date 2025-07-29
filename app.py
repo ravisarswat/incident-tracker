@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, send_file
 import sqlite3
 import os
+import pandas as pd
+import io
+from datetime import datetime
 
 app = Flask(__name__)
 os.makedirs('database', exist_ok=True)
-
 DB_FILE = 'database/incidents.db'
 
 def init_db():
@@ -36,7 +38,6 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Initialize DB once at app startup
 init_db()
 
 @app.route('/')
@@ -89,7 +90,8 @@ def view():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     if search:
-        query = f'''SELECT * FROM incidents WHERE
+        query = '''
+            SELECT * FROM incidents WHERE
             incident_number LIKE ? OR
             reviewed LIKE ? OR
             month LIKE ?
@@ -111,7 +113,6 @@ def view():
 def edit(id):
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
-
     if request.method == 'POST':
         data = (
             request.form['incident_number'],
@@ -159,13 +160,29 @@ def delete(id):
     conn.close()
     return redirect('/view')
 
+from flask import send_file
+import pandas as pd
+import io
+from datetime import datetime
+
 @app.route('/export')
 def export():
-    import pandas as pd
     conn = sqlite3.connect(DB_FILE)
     df = pd.read_sql_query('SELECT * FROM incidents', conn)
     conn.close()
-    filepath = 'exported_incidents.xlsx'
-    df.to_excel(filepath, index=False)
-    return f'Data exported to {filepath}'
+
+    output = io.BytesIO()
+    writer = pd.ExcelWriter(output, engine='openpyxl')
+    df.to_excel(writer, index=False)
+    writer.close()
+    output.seek(0)
+
+    filename = f"incidents_{datetime.now().strftime('%Y-%m-%d_%H%M%S')}.xlsx"
+
+    return send_file(
+        output,
+        as_attachment=True,
+        download_name=filename,
+        mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
 

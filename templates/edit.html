@@ -1,3 +1,4 @@
+<!-- edit.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,119 +8,93 @@
 <body class="bg-light">
   <div class="container mt-5">
     <h2 class="mb-4">Edit Incident #{{ record[0] }}</h2>
-
-    <!-- Incident Edit Form -->
     <form method="post" class="row g-3">
-
-      <!-- Basic Info -->
       <div class="col-md-6">
         <label class="form-label">Incident Number</label>
         <input type="text" name="incident_number" class="form-control" value="{{ record[1] }}">
       </div>
-
       <div class="col-md-6">
         <label class="form-label">Month</label>
         <select name="month" class="form-select">
-  <option value="">Select Month</option>
-  {% for m in ['January','February','March','April','May','June','July','August','September','October','November','December'] %}
-  <option value="{{ m }}" {% if record[2] == m %}selected{% endif %}>{{ m }}</option>
-  {% endfor %}
-</select>
+          <option value="">Select Month</option>
+          {% for m in ['January','February','March','April','May','June','July','August','September','October','November','December'] %}
+          <option value="{{ m }}" {% if record[2] == m %}selected{% endif %}>{{ m }}</option>
+          {% endfor %}
+        </select>
       </div>
-
       <div class="col-md-6">
         <label class="form-label">Opened Date</label>
         <input type="date" name="opened_date" class="form-control" value="{{ record[3] }}">
       </div>
-
       <div class="col-md-6">
         <label class="form-label">Final Impact Classification</label>
-        <input type="text" name="final_impact_classification" class="form-control" value="{{ record[5] }}">
+        <input type="text" name="final_impact_classification" class="form-control" value="{{ record[4] }}">
       </div>
-
       <div class="col-md-6">
         <label class="form-label">Accountability</label>
-        <input type="text" name="accountability" class="form-control" value="{{ record[6] }}">
+        <input type="text" name="accountability" class="form-control" value="{{ record[5] }}">
       </div>
-
-      <!-- Product Details -->
       <div class="col-md-6">
         <label class="form-label">Product Line</label>
-        <input type="text" name="product_line" class="form-control" value="{{ record[7] }}">
+        <input type="text" name="product_line" class="form-control" value="{{ record[6] }}">
       </div>
-
       <div class="col-md-6">
         <label class="form-label">Product</label>
         <select name="product" class="form-select">
-  <option value="">Select Product</option>
-  {% for p in ['CACM', 'CDFO', 'Collection', 'FAS', 'LRCO', 'RPA', 'Service', 'Voice'] %}
-  <option value="{{ p }}" {% if record[8] == p %}selected{% endif %}>{{ p }}</option>
-  {% endfor %}
-</select>
+          <option value="">Select Product</option>
+          {% for p in ['CACM','CDFO','Collection','FAS','LRCO','RPA','Service','Voice'] %}
+          <option value="{{ p }}" {% if record[8] == p %}selected{% endif %}>{{ p }}</option>
+          {% endfor %}
+        </select>
       </div>
-
       <div class="col-md-6">
         <label class="form-label">Seal ID</label>
         <input type="text" name="seal_id" class="form-control" value="{{ record[9] }}">
       </div>
-<div class="col-md-6">
-  <label class="form-label">Seal Name</label>
-  <input type="text" name="seal_name" class="form-control" value="{{ record[10] }}">
-</div>
-
-      <!-- Incident Details -->
+      <div class="col-md-6">
+        <label class="form-label">Seal Name</label>
+        <input type="text" name="seal_name" class="form-control" value="{{ record[10] }}">
+      </div>
       <div class="col-12">
         <label class="form-label">What Happened</label>
-        <textarea name="issue_description" class="form-control">{{ record[10] }}</textarea>
+        <textarea name="issue_description" class="form-control">{{ record[11] }}</textarea>
       </div>
-
       <div class="col-12">
         <label class="form-label">Impact</label>
-        <textarea name="impact" class="form-control">{{ record[11] }}</textarea>
+        <textarea name="impact" class="form-control">{{ record[12] }}</textarea>
       </div>
-
       <div class="col-12">
         <label class="form-label">Timeline Summary</label>
-        <textarea name="timeline_summary" class="form-control">{{ record[12] }}</textarea>
+        <textarea name="timeline_summary" class="form-control">{{ record[13] }}</textarea>
       </div>
-
       <div class="col-12">
         <label class="form-label">Root Cause</label>
-        <textarea name="root_cause" class="form-control">{{ record[13] }}</textarea>
+        <textarea name="root_cause" class="form-control">{{ record[14] }}</textarea>
       </div>
-
-      <!-- Review Process -->
       <div class="col-12">
         <label class="form-label">Code Review</label>
-        <input type="text" name="code_review" class="form-control" value="{{ record[14] }}">
+        <input type="text" name="code_review" class="form-control" value="{{ record[15] }}">
       </div>
-
       <div class="col-12">
         <label class="form-label">Testing (UAT)</label>
-        <textarea name="testing" class="form-control">{{ record[15] }}</textarea>
+        <textarea name="testing" class="form-control">{{ record[16] }}</textarea>
       </div>
-
       <div class="col-12">
         <label class="form-label">Follow-up</label>
-        <textarea name="follow_up" class="form-control">{{ record[16] }}</textarea>
+        <textarea name="follow_up" class="form-control">{{ record[17] }}</textarea>
       </div>
-
-      <!-- Review Status -->
       <div class="col-md-6">
         <label class="form-label">Reviewed</label>
         <select name="reviewed" class="form-select">
           <option value="">Select</option>
-          <option value="Yes" {% if record[17] == 'Yes' %}selected{% endif %}>Yes</option>
-          <option value="No" {% if record[17] == 'No' %}selected{% endif %}>No</option>
+          <option value="Yes" {% if record[18] == 'Yes' %}selected{% endif %}>Yes</option>
+          <option value="No" {% if record[18] == 'No' %}selected{% endif %}>No</option>
         </select>
       </div>
-
       <div class="col-md-6">
         <label class="form-label">Reviewed Date</label>
-        <input type="date" name="reviewed_date" class="form-control" value="{{ record[18] }}">
+        <input type="date" name="reviewed_date" class="form-control" value="{{ record[19] }}">
       </div>
-
-      <!-- Actions -->
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Update Incident</button>
         <a href="/view" class="btn btn-secondary ms-2">Cancel</a>
